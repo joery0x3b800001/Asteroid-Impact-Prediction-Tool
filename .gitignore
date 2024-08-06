@@ -1,0 +1,4 @@
+# ignore all the venv, .env and etc
+
+.env
+/venv/

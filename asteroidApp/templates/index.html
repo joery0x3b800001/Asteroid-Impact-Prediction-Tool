@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Hazard Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .form-group::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .container::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Asteroid Hazard Prediction</h1>
+        <form id="prediction-form">
+            <div class="form-group">
+                <label for="absolute_magnitude_h">Absolute Magnitude H:</label>
+                <input type="number" step="any" id="absolute_magnitude_h" name="absolute_magnitude_h" required>
+            </div>
+            <div class="form-group">
+                <label for="diameter_max_km">Diameter Max (km):</label>
+                <input type="number" step="any" id="diameter_max_km" name="diameter_max_km" required>
+            </div>
+            <div class="form-group">
+                <label for="velocity_km_s">Velocity (km/s):</label>
+                <input type="number" step="any" id="velocity_km_s" name="velocity_km_s" required>
+            </div>
+            <div class="form-group">
+                <label for="miss_distance_km">Miss Distance (km):</label>
+                <input type="number" step="any" id="miss_distance_km" name="miss_distance_km" required>
+            </div>
+            <div class="form-group">
+                <label for="diameter_min_km">Diameter Min (km):</label>
+                <input type="number" step="any" id="diameter_min_km" name="diameter_min_km" required>
+            </div>
+            <button type="submit">Predict</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => { data[key] = parseFloat(value); });
+            
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById('result').textContent = 
+                    result.is_potentially_hazardous_asteroid 
+                    ? 'This asteroid is potentially hazardous.' 
+                    : 'This asteroid is not hazardous.';
+            })
+            .catch(error => {
+                document.getElementById('result').textContent = 'An error occurred: ' + error;
+            });
+        });
+    </script>
+</body>
+</html>
