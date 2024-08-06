@@ -26,8 +26,8 @@ The **Asteroid Impact Prediction Tool** is a Flask-based web application that pr
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-repo/asteroid-impact-prediction-tool.git
-   cd asteroid-impact-prediction-tool
+   git clone https://github.com/joery0x3b800001/Asteroid-Impact-Prediction-Tool
+   cd Asteroid-Impact-Prediction-Tool
    ```
 
 2. **Create a Virtual Environment**
