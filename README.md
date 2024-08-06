@@ -108,3 +108,11 @@ The **Asteroid Impact Prediction Tool** is a Flask-based web application that pr
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE.md) file for details.
+
+## Web Sources
+
+- **[NeoWs (Near Earth Object Web Service)](http://neo.jpl.nasa.gov/)**: This service provides data about near-Earth asteroids, including their closest approach dates, lookup by specific IDs, and the ability to browse the dataset. It’s useful for accessing real-time asteroid information.
+
+- **[Flask Documentation](https://flask.palletsprojects.com/)**: Comprehensive resource for learning Flask, the web framework used in this project.
+
+- **[Scikit-learn Documentation](https://scikit-learn.org/stable/)**: Official documentation for Scikit-learn, the machine learning library utilized in this tool for creating and evaluating predictive models.
